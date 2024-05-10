@@ -950,6 +950,8 @@ ip address dhcp
 
 route inside 192.168.0.0 255.255.0.0 192.168.3.1
 
+aaa authorization exec LOCAL auto-enable
+
 crypto ikev2 enable management
 
 crypto ikev2 policy 50
