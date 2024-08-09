@@ -662,6 +662,14 @@ resource "azurerm_virtual_network_gateway_connection" "to-onprem" {
   shared_key                 = "vpn123"
   type                       = "IPsec"
   virtual_network_gateway_id = azurerm_virtual_network_gateway.azurevpngw.id
+  ipsec_policy {
+    dh_group = "DHGroup14"
+    ike_encryption = "AES256"
+    ike_integrity = "SHA1"
+    ipsec_encryption = "AES256"
+    ipsec_integrity = "SHA1"
+    pfs_group = "None"
+  }
   timeouts {
     create = "2h"
     read = "2h"
@@ -950,14 +958,12 @@ ip address dhcp
 
 route inside 192.168.0.0 255.255.0.0 192.168.3.1
 
-aaa authorization exec LOCAL auto-enable
-
 crypto ikev2 enable management
 
 crypto ikev2 policy 50
  encryption aes-256
  integrity sha
- group 2
+ group 14
  prf sha
  lifetime seconds 86400
 
